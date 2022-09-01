@@ -12,14 +12,12 @@ function isManager(id) {
 const funcionariosRetorno = (managerId) => {
   const dados = data.employees;
   const funcionarios = [];
-  dados.forEach((managerIdCompar) => {
-    for (let index = 0; index < managerIdCompar.managers.length; index += 1) {
-      if (managerIdCompar.managers[index] === managerId) {
-        const nameCompleted = managerIdCompar.firstName.concat(' ', managerIdCompar.lastName);
-        funcionarios.push(nameCompleted);
+  dados.forEach((managerIdCompar) => managerIdCompar.managers
+    .forEach((manager) => {
+      if (manager === managerId) {
+        funcionarios.push(`${managerIdCompar.firstName} ${managerIdCompar.lastName}`);
       }
-    }
-  });
+    }));
   return funcionarios;
 };
 
@@ -31,5 +29,6 @@ function getRelatedEmployees(managerId) {
     return funcionariosRetorno(managerId);
   }
 }
-
+const actual = '9e7d4524-363c-416a-8759-8aa7e50c0992';
+console.log(getRelatedEmployees(actual));
 module.exports = { isManager, getRelatedEmployees };
