@@ -21,21 +21,14 @@ const data = require('../data/zoo_data');
 const criaElemento = (localizacao, options) => {
   const dados = data.species;
   const testeDado = dados
-    .filter((locationName) => locationName.location === localizacao).map((animal) => {
-      let objectoRetorno = {};
-      if (options.sorted) {
-        objectoRetorno = { [animal.name]: animal.residents
-          .filter((resident) => ((!options.sex) || (resident.sex === options.sex)))
-          .map((resident) => resident.name).sort(),
-        };
-      } else {
-        objectoRetorno = { [animal.name]: animal.residents
-          .filter((resident) => ((!options.sex) || (resident.sex === options.sex)))
-          .map((resident) => resident.name),
-        };
-      }
-      return objectoRetorno;
-    });
+    .filter((locationName) => locationName.location === localizacao).map((animal) => ({
+      [animal.name]: animal.residents
+        .filter((resident) => ((!options.sex) || (resident.sex === options.sex)))
+        .map((resident) => resident.name),
+    }));
+  if (options.sorted) {
+    testeDado.forEach((position) => Object.values(position)[0].sort());
+  }
   return testeDado;
 };
 
@@ -64,5 +57,5 @@ function getAnimalMap(options) {
   }
   return retorno;
 }
-
+// console.log(getAnimalMap({ includeNames: true }).NE[0].lions);
 module.exports = getAnimalMap;
