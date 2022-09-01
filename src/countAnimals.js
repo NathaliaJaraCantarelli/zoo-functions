@@ -11,13 +11,12 @@ const allAnimals = (dados) => {
 const maleFemale = (dados, tipo, animal) => {
   const animalInput = animal.specie;
   let cont = 0;
-  dados.forEach((typeAnimal) => {
-    for (let index = 0; index < typeAnimal.residents.length; index += 1) {
-      if ((typeAnimal.name === animalInput) && (typeAnimal.residents[index].sex === tipo)) {
+  dados.forEach((typeAnimal) => typeAnimal.residents
+    .forEach((resident) => {
+      if ((typeAnimal.name === animalInput) && (resident.sex === tipo)) {
         cont += 1;
       }
-    }
-  });
+    }));
   return cont;
 };
 
@@ -26,11 +25,11 @@ const specieOnly = (animal, dados) => {
   let numberAnimals = 0;
   const array = Object.keys(listAnimals);
   const numbers = Object.values(listAnimals);
-  for (let index = 0; index < array.length; index += 1) {
-    if (animal.specie === array[index]) {
+  array.forEach((arrayPosition, index) => {
+    if (animal.specie === arrayPosition) {
       numberAnimals = numbers[index];
     }
-  }
+  });
   return numberAnimals;
 };
 

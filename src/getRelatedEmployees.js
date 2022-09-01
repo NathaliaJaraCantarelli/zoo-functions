@@ -29,6 +29,5 @@ function getRelatedEmployees(managerId) {
     return funcionariosRetorno(managerId);
   }
 }
-const actual = '9e7d4524-363c-416a-8759-8aa7e50c0992';
-console.log(getRelatedEmployees(actual));
+
 module.exports = { isManager, getRelatedEmployees };
